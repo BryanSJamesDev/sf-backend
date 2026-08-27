@@ -70,6 +70,16 @@ class ContactBase(BaseModel):
         examples=["Met at the SF hackathon."],
     )
 
+    photo: str | None = Field(
+        default=None,
+        description=(
+            "Contact photo as a base64 data URL (e.g. "
+            "'data:image/jpeg;base64,...'). Stored as-is; no server-side "
+            "resizing or validation of the image content."
+        ),
+        examples=[None],
+    )
+
 
 _FULL_EXAMPLE = {
     "first_name": "Ada",
@@ -134,6 +144,8 @@ class ContactUpdate(BaseModel):
     postal_code: str | None = Field(default=None, max_length=20, description="New postal code.")
     country: str | None = Field(default=None, max_length=120, description="New country.")
     notes: str | None = Field(default=None, description="New notes; replaces the existing text.")
+
+    photo: str | None = Field(default=None, description="New photo as a base64 data URL.")
 
 
 class ContactRead(ContactBase):
